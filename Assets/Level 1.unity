@@ -599,11 +599,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f66153015c5d4dd0a7b6d983c90193f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSpeed: 20
-  ySpeed: 20
+  speed: 20
   xRange: 6
-  yMin: -3
-  yMax: 3.5
+  yMin: -3.5
+  yMax: 4
+  positionPitchFactor: -5
 --- !u!1 &1960401005
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,11 +641,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4077705939864116, guid: 22547f690bf23405a86345fb931ae778, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.00000011531391
       objectReference: {fileID: 0}
     - target: {fileID: 4077705939864116, guid: 22547f690bf23405a86345fb931ae778, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1.4
+      value: -1.3999996
       objectReference: {fileID: 0}
     - target: {fileID: 4077705939864116, guid: 22547f690bf23405a86345fb931ae778, type: 2}
       propertyPath: m_LocalPosition.z
@@ -673,6 +673,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4077705939864116, guid: 22547f690bf23405a86345fb931ae778, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077705939864116, guid: 22547f690bf23405a86345fb931ae778, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077705939864116, guid: 22547f690bf23405a86345fb931ae778, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
 public class Player : MonoBehaviour {
@@ -6,8 +7,15 @@ public class Player : MonoBehaviour {
     [Tooltip("In ms^-1")] [SerializeField] float speed = 20f;
 
     [Tooltip("In m")] [SerializeField] float xRange = 6f;
-    [Tooltip("In m")] [SerializeField] float yMin = -3f;
-    [Tooltip("In m")] [SerializeField] float yMax = 3.5f;
+    [Tooltip("In m")] [SerializeField] float yMin = -3.5f;
+    [Tooltip("In m")] [SerializeField] float yMax = 4f;
+
+    [SerializeField] float positionPitchFactor = -5f;
+    [SerializeField] float controlPitchFactor = -20f;
+    [SerializeField] float positionYawFactor = 5f;
+    [SerializeField] float controlRollFactor = -20f;
+
+    float yThrow, xThrow;
 
     // Use this for initialization
     void Start () {
@@ -17,8 +25,27 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        float xThrow = CrossPlatformInputManager.GetAxis("Horizontal");
-        float yThrow = CrossPlatformInputManager.GetAxis("Vertical");
+        ProcessTranslation();
+        ProcessRotation();
+    }
+
+    private void ProcessRotation()
+    {
+        float pitchDueToPosition = transform.localPosition.y * positionPitchFactor;
+        float pitchDueToControl = yThrow * controlPitchFactor;
+        float pitch = pitchDueToPosition + pitchDueToControl;
+
+        float yaw = transform.localPosition.x * positionYawFactor;
+
+        float roll = xThrow * controlRollFactor;
+
+        transform.localRotation = Quaternion.Euler(pitch, yaw, roll);
+    }
+
+    private void ProcessTranslation()
+    {
+        xThrow = CrossPlatformInputManager.GetAxis("Horizontal");
+        yThrow = CrossPlatformInputManager.GetAxis("Vertical");
 
         float xOffset = xThrow * speed * Time.deltaTime;
         float yOffset = yThrow * speed * Time.deltaTime;
@@ -30,5 +57,5 @@ public class Player : MonoBehaviour {
         float clampedYPos = Mathf.Clamp(rawYPos, yMin, yMax);
 
         transform.localPosition = new Vector3(clampedXPos, clampedYPos, transform.localPosition.z);
-	}
+    }
 }
