@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
 public class Player : MonoBehaviour {
@@ -13,7 +12,7 @@ public class Player : MonoBehaviour {
     [SerializeField] float positionPitchFactor = -1.5f;
     [SerializeField] float controlPitchFactor = -20f;
     [SerializeField] float positionYawFactor = 2.5f;
-    [SerializeField] float controlRollFactor = -40f;
+    [SerializeField] float controlRollFactor = -50f;
 
     float yThrow, xThrow;
 
