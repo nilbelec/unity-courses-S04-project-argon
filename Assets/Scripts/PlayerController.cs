@@ -1,34 +1,42 @@
 ﻿using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-public class Player : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
 
-    [Tooltip("In ms^-1")] [SerializeField] float speed = 15f;
-
+    [Header("General")]
+    [Tooltip("In ms^-1")] [SerializeField] float controlSpeed = 15f;
     [Tooltip("In m")] [SerializeField] float xRange = 10f;
     [Tooltip("In m")] [SerializeField] float yMin = -5.5f;
     [Tooltip("In m")] [SerializeField] float yMax = 6.5f;
 
+    [Header("Screen position based")]
     [SerializeField] float positionPitchFactor = -1.5f;
-    [SerializeField] float controlPitchFactor = -20f;
     [SerializeField] float positionYawFactor = 2.5f;
+
+    [Header("Control throw based")]
+    [SerializeField] float controlPitchFactor = -20f;
     [SerializeField] float controlRollFactor = -50f;
 
     float yThrow, xThrow;
+    bool enabled = true;
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    // Update is called once per frame
+    void Update ()
     {
-        ProcessTranslation();
-        ProcessRotation();
+        if (enabled)
+        {
+            ProcessTranslation();
+            ProcessRotation();
+        }
     }
 
-    private void ProcessRotation()
+    void OnPlayerDeath() // called by string reference
+    {
+        print("Control disabled");
+        enabled = false;
+    }
+
+    void ProcessRotation()
     {
         float pitchDueToPosition = transform.localPosition.y * positionPitchFactor;
         float pitchDueToControl = yThrow * controlPitchFactor;
@@ -41,13 +49,13 @@ public class Player : MonoBehaviour {
         transform.localRotation = Quaternion.Euler(pitch, yaw, roll);
     }
 
-    private void ProcessTranslation()
+    void ProcessTranslation()
     {
         xThrow = CrossPlatformInputManager.GetAxis("Horizontal");
         yThrow = CrossPlatformInputManager.GetAxis("Vertical");
 
-        float xOffset = xThrow * speed * Time.deltaTime;
-        float yOffset = yThrow * speed * Time.deltaTime;
+        float xOffset = xThrow * controlSpeed * Time.deltaTime;
+        float yOffset = yThrow * controlSpeed * Time.deltaTime;
 
         float rawXPos = transform.localPosition.x + xOffset;
         float clampedXPos = Mathf.Clamp(rawXPos, -xRange, xRange);
