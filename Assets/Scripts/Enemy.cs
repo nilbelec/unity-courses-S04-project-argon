@@ -2,12 +2,10 @@
 
 public class Enemy : MonoBehaviour {
 
-    void Start()
-    {
-        AddNonTriggerBoxCollider();
-    }
+    [SerializeField] GameObject deathFX;
+    [SerializeField] Transform parent;
 
-    void AddNonTriggerBoxCollider()
+    void Start()
     {
         Collider boxCollider = gameObject.AddComponent<BoxCollider>();
         boxCollider.isTrigger = false;
@@ -15,6 +13,7 @@ public class Enemy : MonoBehaviour {
 
     void OnParticleCollision(GameObject other)
     {
+        Instantiate(deathFX, transform.position, Quaternion.identity, parent);
         Destroy(gameObject);
     }
 }
