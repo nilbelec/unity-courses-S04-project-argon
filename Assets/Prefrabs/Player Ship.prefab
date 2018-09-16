@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 198088025541872010}
   - component: {fileID: 199397077181760804}
   m_Layer: 0
-  m_Name: Bullets RIght
+  m_Name: Gun RIght
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 198371941928938560}
   - component: {fileID: 199769424087332544}
   m_Layer: 0
-  m_Name: Bullets Left
+  m_Name: Gun Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -318,6 +318,9 @@ MonoBehaviour:
   xRange: 10
   yMin: -5.5
   yMax: 6.5
+  guns:
+  - {fileID: 1810905120682144}
+  - {fileID: 1719679764485872}
   positionPitchFactor: -1.5
   positionYawFactor: 2.5
   controlPitchFactor: -20
@@ -1103,7 +1106,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
   EmissionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 4
     rateOverTime:
       serializedVersion: 2
@@ -10169,7 +10172,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
   EmissionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 4
     rateOverTime:
       serializedVersion: 2
